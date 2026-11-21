@@ -3,7 +3,6 @@ using Testing.Data;
 using Testing.Entities;
 using Testing.Business;
 using Testing.Controllers;
-using Testing.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,9 +13,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //data
-builder.Services.AddScoped<CanchaData>();
-builder.Services.AddScoped<ClienteData>();
-builder.Services.AddScoped<TurnoData>();
+builder.Services.AddScoped<CanchaRepository>();
+builder.Services.AddScoped<ClienteRepository>();
+builder.Services.AddScoped<TurnoRepository>();
 //services
 builder.Services.AddScoped<CanchaService>();
 builder.Services.AddScoped<ClienteService>();

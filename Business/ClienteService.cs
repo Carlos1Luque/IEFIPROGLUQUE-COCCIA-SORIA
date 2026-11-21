@@ -1,13 +1,12 @@
-using Testing.Controllers;
 using Testing.Data;
 namespace Testing.Business;
 
 public class ClienteService
 {
-    private readonly AppDbContext _context;
+    private readonly ClienteRepository _repository;
 
-    public ClienteService(AppDbContext context)
+    public ClienteService(ClienteRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 }

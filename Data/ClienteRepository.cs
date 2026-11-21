@@ -3,11 +3,11 @@ using Testing.Entities;
 
 namespace Testing.Data;
 
-public class TurnoData
+public class ClienteRepository
 {
     private readonly AppDbContext _context;
 
-    public TurnoData(AppDbContext context)
+    public ClienteRepository(AppDbContext context)
     {
         _context = context;
     }

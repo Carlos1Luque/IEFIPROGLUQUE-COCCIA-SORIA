@@ -1,13 +1,17 @@
-using Testing.Controllers;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Testing.Data;
+using Testing.Entities;
+
+
 namespace Testing.Business;
 
 public class CanchaService
 {
-    private readonly AppDbContext _context;
+    private readonly CanchaRepository _repository;
 
-    public CanchaService(AppDbContext context)
+    public CanchaService(CanchaRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 }

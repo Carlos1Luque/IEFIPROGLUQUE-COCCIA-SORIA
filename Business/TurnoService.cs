@@ -1,13 +1,12 @@
-using Testing.Controllers;
 using Testing.Data;
 namespace Testing.Business;
 
 public class TurnoService
 {
-    private readonly AppDbContext _context;
+    private readonly TurnoRepository _repository;
 
-    public TurnoService(AppDbContext context)
+    public TurnoService(TurnoRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 }

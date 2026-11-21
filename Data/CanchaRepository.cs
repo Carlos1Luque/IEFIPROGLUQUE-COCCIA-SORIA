@@ -3,11 +3,11 @@ using Testing.Entities;
 
 namespace Testing.Data;
 
-public class CanchaData
+public class CanchaRepository
 {
     private readonly AppDbContext _context;
 
-    public CanchaData(AppDbContext context)
+    public CanchaRepository(AppDbContext context)
     {
         _context = context;
     }

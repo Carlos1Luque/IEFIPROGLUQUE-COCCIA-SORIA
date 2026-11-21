@@ -1,13 +1,12 @@
-using Microsoft.EntityFrameworkCore;
 using Testing.Entities;
 
 namespace Testing.Data;
 
-public class ClienteData
+public class TurnoRepository
 {
     private readonly AppDbContext _context;
 
-    public ClienteData(AppDbContext context)
+    public TurnoRepository(AppDbContext context)
     {
         _context = context;
     }
