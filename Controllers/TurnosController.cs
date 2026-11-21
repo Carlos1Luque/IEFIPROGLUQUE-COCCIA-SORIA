@@ -32,6 +32,37 @@ public class TurnosController : ControllerBase
         }
     }
 
+    [HttpGet("disponibilidad")]
+    public async Task<IActionResult> GetDisponibilidad(int idCancha, DateTime fecha)
+    {
+        try
+        {
+            if (idCancha <= 0)
+            {
+                return BadRequest("El ID de la cancha debe ser mayor que cero.");
+            }
+
+            if (fecha == DateTime.MinValue)
+            {
+                return BadRequest("La fecha es obligatoria.");
+            }
+
+            var horariosLibres = await _service.GetDisponibilidadAsync(idCancha, fecha);
+
+            if (horariosLibres is null)
+            {
+                return NotFound("No se encontró una cancha con ese id.");
+            }
+
+            return Ok(horariosLibres);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error al consultar la disponibilidad de la cancha");
+            return StatusCode(500, "Ocurrió un error al procesar la solicitud.");
+        }
+    }
+
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {

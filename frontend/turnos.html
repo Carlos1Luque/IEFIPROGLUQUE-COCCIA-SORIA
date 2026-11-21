@@ -90,6 +90,7 @@
                     <div class="campo">
                         <label for="fecha">Fecha <span class="obligatorio">*</span></label>
                         <input type="date" id="fecha" name="fecha" required>
+                        <button type="button" id="boton-horarios-libres" class="boton boton-secundario">Ver horarios libres</button>
                     </div>
 
                     <div class="campo">
@@ -113,6 +114,11 @@
                     </div>
                     <p class="ayuda">Los campos con * son obligatorios.</p>
                 </form>
+
+                <section id="contenedor-horarios-libres" class="formulario" aria-labelledby="titulo-horarios-libres" hidden>
+                    <h2 id="titulo-horarios-libres">Horarios libres</h2>
+                    <ul id="lista-horarios-libres"></ul>
+                </section>
             </section>
         </div>
     </main>

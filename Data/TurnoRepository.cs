@@ -24,6 +24,16 @@ public class TurnoRepository
         return turnoBuscado;
     }
 
+    public async Task<List<Turno>> GetByCanchaYFecha(int idCancha, DateTime fecha)
+    {
+        var turnos = await _context.Turnos
+            .Where(t => t.IdCancha == idCancha
+                && t.Fecha.Date == fecha.Date)
+            .ToListAsync();
+
+        return turnos;
+    }
+
     public async Task AddTurno(Turno turno)
     {
         await _context.Turnos.AddAsync(turno);

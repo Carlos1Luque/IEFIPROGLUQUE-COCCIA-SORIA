@@ -477,6 +477,83 @@ async function eliminarTurno(id)
     }
 }
 
+async function verHorariosLibres()
+{
+    var botonHorarios = document.getElementById("boton-horarios-libres");
+    var contenedorHorarios = document.getElementById("contenedor-horarios-libres");
+    var listaHorarios = document.getElementById("lista-horarios-libres");
+
+    try
+    {
+        contenedorHorarios.hidden = true;
+        listaHorarios.textContent = "";
+        mostrarMensaje("", false);
+
+        var idCancha = Number(document.getElementById("id-cancha").value);
+        var fecha = document.getElementById("fecha").value;
+
+        if (idCancha <= 0)
+        {
+            mostrarMensaje("Debe elegir una cancha activa.", true);
+            document.getElementById("id-cancha").focus();
+            return;
+        }
+
+        if (fecha === "")
+        {
+            mostrarMensaje("La fecha es obligatoria.", true);
+            document.getElementById("fecha").focus();
+            return;
+        }
+
+        var fechaActual = obtenerFechaActual();
+
+        if (fecha < fechaActual)
+        {
+            mostrarMensaje("La fecha no puede estar en el pasado.", true);
+            document.getElementById("fecha").focus();
+            return;
+        }
+
+        botonHorarios.disabled = true;
+        var fechaConsulta = encodeURIComponent(fecha);
+        var url = API_URL + "/Turnos/disponibilidad?idCancha=" + idCancha + "&fecha=" + fechaConsulta;
+        var respuesta = await fetch(url);
+
+        if (respuesta.ok === false)
+        {
+            var mensajeError = await leerRespuestaTexto(respuesta);
+            mostrarMensaje(mensajeError, true);
+            return;
+        }
+
+        var horarios = await respuesta.json();
+
+        if (horarios.length === 0)
+        {
+            mostrarMensaje("No hay horarios libres para esa cancha en esa fecha.", false);
+            return;
+        }
+
+        for (var horario of horarios)
+        {
+            var item = document.createElement("li");
+            item.textContent = horario;
+            listaHorarios.appendChild(item);
+        }
+
+        contenedorHorarios.hidden = false;
+    }
+    catch (error)
+    {
+        mostrarMensaje("No se pudieron consultar los horarios libres. Verificá la conexión con la API.", true);
+    }
+    finally
+    {
+        botonHorarios.disabled = false;
+    }
+}
+
 function limpiarFormulario()
 {
     document.getElementById("formulario-turno").reset();
@@ -485,6 +562,8 @@ function limpiarFormulario()
     document.getElementById("titulo-formulario").textContent = "Nuevo turno";
     document.getElementById("boton-guardar").textContent = "Crear turno";
     document.getElementById("boton-cancelar").hidden = true;
+    document.getElementById("contenedor-horarios-libres").hidden = true;
+    document.getElementById("lista-horarios-libres").textContent = "";
     mostrarMensaje("", false);
 }
 
@@ -517,5 +596,6 @@ async function iniciarPantalla()
 document.getElementById("formulario-turno").addEventListener("submit", guardarTurno);
 document.getElementById("boton-cancelar").addEventListener("click", limpiarFormulario);
 document.getElementById("boton-actualizar").addEventListener("click", iniciarPantalla);
+document.getElementById("boton-horarios-libres").addEventListener("click", verHorariosLibres);
 cargarHoras();
 iniciarPantalla();

@@ -104,6 +104,59 @@ public class TurnoService
         return turnoDto;
     }
 
+    public async Task<List<string>?> GetDisponibilidadAsync(int idCancha, DateTime fecha)
+    {
+        var canchaBuscada = await _canchaRepository.GetById(idCancha);
+
+        if (canchaBuscada is null)
+        {
+            return null;
+        }
+
+        List<string> horariosLibres = new List<string>();
+
+        if (canchaBuscada.Activa == false)
+        {
+            return horariosLibres;
+        }
+
+        var turnos = await _repository.GetByCanchaYFecha(idCancha, fecha);
+        var ahora = DateTime.Now;
+
+        for (int hora = 8; hora < 23; hora++)
+        {
+            var siguienteHora = hora + 1;
+            var inicioBloque = TimeSpan.FromHours(hora);
+            var finBloque = TimeSpan.FromHours(siguienteHora);
+            var fechaHoraInicio = fecha.Date.Add(inicioBloque);
+            bool disponible = true;
+
+            foreach (var turno in turnos)
+            {
+                if (inicioBloque < turno.HoraFin
+                    && finBloque > turno.HoraInicio)
+                {
+                    disponible = false;
+                }
+            }
+
+            if (fechaHoraInicio < ahora)
+            {
+                disponible = false;
+            }
+
+            if (disponible)
+            {
+                var textoInicio = hora.ToString("00") + ":00";
+                var textoFin = siguienteHora.ToString("00") + ":00";
+                var bloque = textoInicio + " - " + textoFin;
+                horariosLibres.Add(bloque);
+            }
+        }
+
+        return horariosLibres;
+    }
+
     public async Task<string?> AddTurnoAsync(PostRequestTurno turno)
     {
         var canchaBuscada = await _canchaRepository.GetById(turno.IdCancha);
