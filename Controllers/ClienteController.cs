@@ -73,10 +73,82 @@ public class ClienteController : ControllerBase
                 return BadRequest("El nombre del cliente es obligatorio.");
             }
 
+            if (cliente.Nombre.Length > 50)
+            {
+                return BadRequest("El nombre del cliente no puede superar los 50 caracteres.");
+            }
+
             if (string.IsNullOrWhiteSpace(cliente.Apellido))
             {
                 return BadRequest("El apellido del cliente es obligatorio.");
             }
+
+            if (cliente.Apellido.Length > 50)
+            {
+                return BadRequest("El apellido del cliente no puede superar los 50 caracteres.");
+            }
+
+            if (string.IsNullOrWhiteSpace(cliente.Dni))
+            {
+                return BadRequest("El DNI del cliente es obligatorio.");
+            }
+
+            if (cliente.Dni.Length < 7)
+            {
+                return BadRequest("El DNI debe tener al menos 7 dígitos.");
+            }
+
+            if (cliente.Dni.Length > 8)
+            {
+                return BadRequest("El DNI no puede superar los 8 dígitos.");
+            }
+
+            foreach (var caracter in cliente.Dni)
+            {
+                if (caracter < '0')
+                {
+                    return BadRequest("El DNI debe contener solo números.");
+                }
+
+                if (caracter > '9')
+                {
+                    return BadRequest("El DNI debe contener solo números.");
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(cliente.Telefono))
+            {
+                return BadRequest("El teléfono del cliente es obligatorio.");
+            }
+
+            if (cliente.Telefono.Length < 8)
+            {
+                return BadRequest("El teléfono debe tener al menos 8 dígitos.");
+            }
+
+            if (cliente.Telefono.Length > 15)
+            {
+                return BadRequest("El teléfono no puede superar los 15 dígitos.");
+            }
+
+            foreach (var caracter in cliente.Telefono)
+            {
+                if (caracter < '0')
+                {
+                    return BadRequest("El teléfono debe contener solo números.");
+                }
+
+                if (caracter > '9')
+                {
+                    return BadRequest("El teléfono debe contener solo números.");
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(cliente.Email))
+            {
+                return BadRequest("El email del cliente es obligatorio.");
+            }
+
 
             var error = await _service.AddClienteAsync(cliente);
 
@@ -114,10 +186,82 @@ public class ClienteController : ControllerBase
                 return BadRequest("El nombre del cliente es obligatorio.");
             }
 
+            if (cliente.Nombre.Length > 50)
+            {
+                return BadRequest("El nombre del cliente no puede superar los 50 caracteres.");
+            }
+
             if (string.IsNullOrWhiteSpace(cliente.Apellido))
             {
                 return BadRequest("El apellido del cliente es obligatorio.");
             }
+
+            if (cliente.Apellido.Length > 50)
+            {
+                return BadRequest("El apellido del cliente no puede superar los 50 caracteres.");
+            }
+
+            if (string.IsNullOrWhiteSpace(cliente.Dni))
+            {
+                return BadRequest("El DNI del cliente es obligatorio.");
+            }
+
+            if (cliente.Dni.Length < 7)
+            {
+                return BadRequest("El DNI debe tener al menos 7 dígitos.");
+            }
+
+            if (cliente.Dni.Length > 8)
+            {
+                return BadRequest("El DNI no puede superar los 8 dígitos.");
+            }
+
+            foreach (var caracter in cliente.Dni)
+            {
+                if (caracter < '0')
+                {
+                    return BadRequest("El DNI debe contener solo números.");
+                }
+
+                if (caracter > '9')
+                {
+                    return BadRequest("El DNI debe contener solo números.");
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(cliente.Telefono))
+            {
+                return BadRequest("El teléfono del cliente es obligatorio.");
+            }
+
+            if (cliente.Telefono.Length < 8)
+            {
+                return BadRequest("El teléfono debe tener al menos 8 dígitos.");
+            }
+
+            if (cliente.Telefono.Length > 15)
+            {
+                return BadRequest("El teléfono no puede superar los 15 dígitos.");
+            }
+
+            foreach (var caracter in cliente.Telefono)
+            {
+                if (caracter < '0')
+                {
+                    return BadRequest("El teléfono debe contener solo números.");
+                }
+
+                if (caracter > '9')
+                {
+                    return BadRequest("El teléfono debe contener solo números.");
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(cliente.Email))
+            {
+                return BadRequest("El email del cliente es obligatorio.");
+            }
+
 
             var clienteBuscado = await _service.GetByIdAsync(id);
 

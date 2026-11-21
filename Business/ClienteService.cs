@@ -60,6 +60,20 @@ public class ClienteService
 
     public async Task<string?> AddClienteAsync(PostRequestCliente cliente)
     {
+        var existeDni = await _repository.ExisteDni(cliente.Dni, 0);
+
+        if (existeDni)
+        {
+            return "Ya existe un cliente con ese DNI.";
+        }
+
+        var existeEmail = await _repository.ExisteEmail(cliente.Email, 0);
+
+        if (existeEmail)
+        {
+            return "Ya existe un cliente con ese email.";
+        }
+
         Cliente nuevoCliente = new Cliente
         {
             Nombre = cliente.Nombre,
@@ -81,6 +95,20 @@ public class ClienteService
         if (clienteBuscado is null)
         {
             return "No se encontró un cliente con ese id.";
+        }
+
+        var existeDni = await _repository.ExisteDni(cliente.Dni, id);
+
+        if (existeDni)
+        {
+            return "Ya existe un cliente con ese DNI.";
+        }
+
+        var existeEmail = await _repository.ExisteEmail(cliente.Email, id);
+
+        if (existeEmail)
+        {
+            return "Ya existe un cliente con ese email.";
         }
 
         clienteBuscado.Nombre = cliente.Nombre;

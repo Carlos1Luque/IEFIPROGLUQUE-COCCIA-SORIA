@@ -1,8 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Testing.Data;
-using Testing.Entities;
 using Testing.Business;
-using Testing.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +10,15 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("PermitirFrontend", policy =>
+    {
+        policy.AllowAnyOrigin();
+        policy.AllowAnyHeader();
+        policy.AllowAnyMethod();
+    });
+});
 //data
 builder.Services.AddScoped<CanchaRepository>();
 builder.Services.AddScoped<ClienteRepository>();
@@ -33,7 +40,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+if (app.Environment.IsDevelopment() == false)
+{
+    app.UseHttpsRedirection();
+}
+
+app.UseRouting();
+
+app.UseCors("PermitirFrontend");
 
 app.UseAuthorization();
 

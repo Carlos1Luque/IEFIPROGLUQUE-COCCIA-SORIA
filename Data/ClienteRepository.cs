@@ -40,6 +40,26 @@ public class ClienteRepository
         return tieneTurnos;
     }
 
+    public async Task<bool> ExisteDni(string dni, int id)
+    {
+        var existeDni = await _context.Clientes
+            .Where(c => c.Dni == dni
+                && c.Id != id)
+            .AnyAsync();
+
+        return existeDni;
+    }
+
+    public async Task<bool> ExisteEmail(string email, int id)
+    {
+        var existeEmail = await _context.Clientes
+            .Where(c => c.Email == email
+                && c.Id != id)
+            .AnyAsync();
+
+        return existeEmail;
+    }
+
     public async Task SaveChanges()
     {
         await _context.SaveChangesAsync();

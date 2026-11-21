@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio | Reserva de canchas</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <header class="cabecera">
+        <div class="contenedor barra-navegacion">
+            <a class="marca" href="index.html">
+                <span class="marca-icono" aria-hidden="true">RC</span>
+                <span>Reserva de canchas</span>
+            </a>
+            <nav aria-label="Navegación principal">
+                <a href="index.html" aria-current="page">Inicio</a>
+                <a href="canchas.html">Canchas</a>
+                <a href="clientes.html">Clientes</a>
+                <a href="turnos.html">Turnos</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="contenedor">
+        <section class="presentacion">
+            <p class="etiqueta">Panel de administración</p>
+            <h1>Todo listo para el próximo partido.</h1>
+            <p class="descripcion">Gestioná tus canchas, clientes y reservas desde un mismo lugar.</p>
+        </section>
+
+        <div id="mensaje" class="mensaje" role="status" aria-live="polite" hidden></div>
+
+        <section class="tarjetas" aria-label="Secciones del sistema">
+            <a class="tarjeta" href="canchas.html">
+                <span class="tarjeta-icono" aria-hidden="true">C</span>
+                <h2>Canchas</h2>
+                <p>Consultá precios y disponibilidad. Agregá o actualizá las canchas del predio.</p>
+                <span class="tarjeta-enlace">Administrar canchas</span>
+            </a>
+            <a class="tarjeta" href="clientes.html">
+                <span class="tarjeta-icono" aria-hidden="true">CL</span>
+                <h2>Clientes</h2>
+                <p>Organizá los datos de tus clientes y su información de contacto.</p>
+                <span class="tarjeta-enlace">Administrar clientes</span>
+            </a>
+            <a class="tarjeta" href="turnos.html">
+                <span class="tarjeta-icono" aria-hidden="true">T</span>
+                <h2>Turnos</h2>
+                <p>Consultá y gestioná las reservas de cada cancha y sus horarios.</p>
+                <span class="tarjeta-enlace">Administrar turnos</span>
+            </a>
+        </section>
+    </main>
+
+    <footer class="contenedor pie">Sistema de reserva de canchas · Programación II</footer>
+    <script src="js/comun.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canchas | Reserva de canchas</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <header class="cabecera">
+        <div class="contenedor barra-navegacion">
+            <a class="marca" href="index.html">
+                <span class="marca-icono" aria-hidden="true">RC</span>
+                <span>Reserva de canchas</span>
+            </a>
+            <nav aria-label="Navegación principal">
+                <a href="index.html">Inicio</a>
+                <a href="canchas.html" aria-current="page">Canchas</a>
+                <a href="clientes.html">Clientes</a>
+                <a href="turnos.html">Turnos</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="contenedor">
+        <section class="encabezado-pagina">
+            <p class="etiqueta">Administración del predio</p>
+            <h1>Canchas</h1>
+            <p class="descripcion">Mantené al día los datos, precios y estado de tus canchas.</p>
+        </section>
+
+        <div id="mensaje" class="mensaje" role="status" aria-live="polite" hidden></div>
+
+        <div class="distribucion">
+            <section class="panel" aria-labelledby="titulo-listado">
+                <div class="panel-cabecera">
+                    <div>
+                        <h2 id="titulo-listado">Listado de canchas</h2>
+                        <p>Las canchas activas pueden recibir reservas.</p>
+                    </div>
+                    <button type="button" id="boton-actualizar" class="boton boton-secundario">Actualizar</button>
+                </div>
+
+                <div class="tabla-contenedor" tabindex="0" role="region" aria-label="Listado de canchas, desplazamiento horizontal">
+                    <table>
+                        <caption class="solo-lectores">Canchas registradas y acciones disponibles</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Tipo</th>
+                                <th scope="col">Precio por hora</th>
+                                <th scope="col">Activa</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-canchas"></tbody>
+                    </table>
+                </div>
+                <p id="estado-tabla" class="estado-tabla" role="status">Cargando canchas...</p>
+            </section>
+
+            <section class="panel panel-formulario" aria-labelledby="titulo-formulario">
+                <div class="panel-cabecera">
+                    <div>
+                        <h2 id="titulo-formulario">Nueva cancha</h2>
+                        <p>Completá los datos para guardar la cancha.</p>
+                    </div>
+                </div>
+
+                <form id="formulario-cancha" class="formulario" novalidate>
+                    <input type="hidden" id="id-cancha" value="">
+
+                    <div class="campo">
+                        <label for="nombre">Nombre <span class="obligatorio">*</span></label>
+                        <input type="text" id="nombre" name="nombre" maxlength="50" required aria-describedby="ayuda-nombre">
+                        <span id="ayuda-nombre" class="ayuda">Hasta 50 caracteres.</span>
+                    </div>
+
+                    <div class="campo">
+                        <label for="tipo-cancha">Tipo de cancha <span class="obligatorio">*</span></label>
+                        <input type="text" id="tipo-cancha" name="tipoCancha" placeholder="Ej.: Fútbol 5" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="precio">Precio por hora ($) <span class="obligatorio">*</span></label>
+                        <input type="number" id="precio" name="precioXhora" min="1" step="1" inputmode="numeric" required>
+                    </div>
+
+                    <label class="casilla" for="activa">
+                        <input type="checkbox" id="activa" name="activa" checked>
+                        <span>Cancha activa</span>
+                    </label>
+                    <p class="ayuda">Desmarcá esta opción para impedir nuevas reservas.</p>
+
+                    <div class="acciones-formulario">
+                        <button type="submit" id="boton-guardar" class="boton boton-primario">Crear cancha</button>
+                        <button type="button" id="boton-cancelar" class="boton boton-secundario" hidden>Cancelar</button>
+                    </div>
+                    <p class="ayuda">Los campos con * son obligatorios.</p>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <footer class="contenedor pie">Sistema de reserva de canchas · Programación II</footer>
+    <script src="js/comun.js"></script>
+    <script src="js/canchas.js"></script>
+</body>
+</html>
