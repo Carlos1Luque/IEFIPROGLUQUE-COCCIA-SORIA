@@ -59,7 +59,7 @@ public class ClienteController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(PostResponseCliente? cliente)
+    public async Task<IActionResult> Create(PostRequestCliente? cliente)
     {
         try
         {
@@ -95,7 +95,7 @@ public class ClienteController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, PostResponseCliente? cliente)
+    public async Task<IActionResult> Update(int id, PostRequestCliente? cliente)
     {
         try
         {

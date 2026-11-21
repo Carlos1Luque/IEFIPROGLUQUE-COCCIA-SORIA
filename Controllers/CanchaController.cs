@@ -73,6 +73,11 @@ public class CanchaController : ControllerBase
                 return BadRequest("El nombre de la cancha es obligatorio.");
             }
 
+            if (cancha.Nombre.Length > 50)
+            {
+                return BadRequest("El nombre de la cancha no puede superar los 50 caracteres.");
+            }
+
             if (string.IsNullOrWhiteSpace(cancha.TipoCancha))
             {
                 return BadRequest("El tipo de cancha es obligatorio.");
@@ -81,6 +86,11 @@ public class CanchaController : ControllerBase
             if (cancha.PrecioXhora <= 0)
             {
                 return BadRequest("El precio por hora debe ser mayor que cero.");
+            }
+
+            if (cancha.PrecioXhora > 1000000)
+            {
+                return BadRequest("El precio por hora no puede superar 1000000.");
             }
 
             var error = await _service.AddCanchaAsync(cancha);
@@ -119,6 +129,11 @@ public class CanchaController : ControllerBase
                 return BadRequest("El nombre de la cancha es obligatorio.");
             }
 
+            if (cancha.Nombre.Length > 50)
+            {
+                return BadRequest("El nombre de la cancha no puede superar los 50 caracteres.");
+            }
+
             if (string.IsNullOrWhiteSpace(cancha.TipoCancha))
             {
                 return BadRequest("El tipo de cancha es obligatorio.");
@@ -127,6 +142,11 @@ public class CanchaController : ControllerBase
             if (cancha.PrecioXhora <= 0)
             {
                 return BadRequest("El precio por hora debe ser mayor que cero.");
+            }
+
+            if (cancha.PrecioXhora > 1000000)
+            {
+                return BadRequest("El precio por hora no puede superar 1000000.");
             }
 
             var canchaBuscada = await _service.GetByIdAsync(id);

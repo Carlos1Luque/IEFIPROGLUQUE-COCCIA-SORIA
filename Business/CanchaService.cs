@@ -25,6 +25,7 @@ public class CanchaService
                 Id = cancha.Id,
                 Nombre = cancha.Nombre,
                 TipoCancha = cancha.TipoCancha,
+                PrecioXhora = cancha.PrecioXhora,
                 Activa = cancha.Activa
             };
 
@@ -48,6 +49,7 @@ public class CanchaService
             Id = canchaBuscada.Id,
             Nombre = canchaBuscada.Nombre,
             TipoCancha = canchaBuscada.TipoCancha,
+            PrecioXhora = canchaBuscada.PrecioXhora,
             Activa = canchaBuscada.Activa
         };
 
@@ -61,7 +63,7 @@ public class CanchaService
             Nombre = cancha.Nombre,
             TipoCancha = cancha.TipoCancha,
             PrecioXhora = cancha.PrecioXhora,
-            Activa = true
+            Activa = cancha.Activa
         };
 
         await _repository.AddCancha(nuevaCancha);
@@ -81,6 +83,7 @@ public class CanchaService
         canchaBuscada.Nombre = cancha.Nombre;
         canchaBuscada.TipoCancha = cancha.TipoCancha;
         canchaBuscada.PrecioXhora = cancha.PrecioXhora;
+        canchaBuscada.Activa = cancha.Activa;
 
         await _repository.SaveChanges();
         return null;

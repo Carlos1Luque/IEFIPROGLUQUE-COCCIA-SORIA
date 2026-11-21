@@ -24,7 +24,10 @@ public class ClienteService
             {
                 Id = cliente.Id,
                 Nombre = cliente.Nombre,
-                Apellido = cliente.Apellido
+                Apellido = cliente.Apellido,
+                Dni = cliente.Dni,
+                Telefono = cliente.Telefono,
+                Email = cliente.Email
             };
 
             clientesDto.Add(clienteDto);
@@ -46,21 +49,24 @@ public class ClienteService
         {
             Id = clienteBuscado.Id,
             Nombre = clienteBuscado.Nombre,
-            Apellido = clienteBuscado.Apellido
+            Apellido = clienteBuscado.Apellido,
+            Dni = clienteBuscado.Dni,
+            Telefono = clienteBuscado.Telefono,
+            Email = clienteBuscado.Email
         };
 
         return clienteDto;
     }
 
-    public async Task<string?> AddClienteAsync(PostResponseCliente cliente)
+    public async Task<string?> AddClienteAsync(PostRequestCliente cliente)
     {
         Cliente nuevoCliente = new Cliente
         {
             Nombre = cliente.Nombre,
             Apellido = cliente.Apellido,
-            Dni = string.Empty,
-            Telefono = string.Empty,
-            Email = string.Empty
+            Dni = cliente.Dni,
+            Telefono = cliente.Telefono,
+            Email = cliente.Email
         };
 
         await _repository.AddCliente(nuevoCliente);
@@ -68,7 +74,7 @@ public class ClienteService
         return null;
     }
 
-    public async Task<string?> UpdateAsync(int id, PostResponseCliente cliente)
+    public async Task<string?> UpdateAsync(int id, PostRequestCliente cliente)
     {
         var clienteBuscado = await _repository.GetById(id);
 
@@ -79,6 +85,9 @@ public class ClienteService
 
         clienteBuscado.Nombre = cliente.Nombre;
         clienteBuscado.Apellido = cliente.Apellido;
+        clienteBuscado.Dni = cliente.Dni;
+        clienteBuscado.Telefono = cliente.Telefono;
+        clienteBuscado.Email = cliente.Email;
 
         await _repository.SaveChanges();
         return null;
